@@ -13,6 +13,8 @@ const sequelize = new Sequelize(
 );
 
 db.User = require("./User")(sequelize);
+db.Budget = require("./Budget")(sequelize);
+db.Spending = require("./Spending")(sequelize);
 
 // 외래키 관계 설정
 // db.Company.hasMany(db.Job, { foreignKey: "company_id" });
