@@ -17,8 +17,11 @@ db.Budget = require("./Budget")(sequelize);
 db.Spending = require("./Spending")(sequelize);
 
 // 외래키 관계 설정
-// db.Company.hasMany(db.Job, { foreignKey: "company_id" });
-// db.Job.belongsTo(db.Company, { foreignKey: "company_id" });
+db.User.hasMany(db.Spending, { foreignKey: "user_id" });
+db.Spending.belongsTo(db.User, { foreignKey: "user_id" });
+
+db.User.hasMany(db.Budget, { foreignKey: "user_id" });
+db.Budget.belongsTo(db.User, { foreignKey: "user_id" });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
