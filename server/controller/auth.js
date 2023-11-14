@@ -1,9 +1,8 @@
 const { bcryptPassword, comparePassword } = require("./encryption");
 const jwt = require("../utils/jwt_utils");
-const redisClient = require("../utils/redis");
 const { User } = require("../models");
 // 회원가입
-const post_signup = async (req, res) => {
+const postSignup = async (req, res) => {
   const { user_id, password } = req.body;
 
   //bcrypt 암호화
@@ -20,7 +19,7 @@ const post_signup = async (req, res) => {
 };
 
 // 로그인 result 1(user x) || 2(paasword x) || 3(succes)
-const post_signin = async (req, res) => {
+const postSignin = async (req, res) => {
   const { user_id, password } = req.body;
 
   // 아이디 존재 여부 확인
@@ -37,9 +36,7 @@ const post_signin = async (req, res) => {
     if (comparePassword(password, user.password)) {
       // 로그인 성공 JWT토큰 생성
       const accessToken = jwt.sign(user);
-      const refreshToken = jwt.refresh();
-
-      redisClient.set(user_id, refreshToken);
+      const refreshToken = await jwt.refresh(user.user_id);
 
       res.json({
         result: "3",
@@ -55,4 +52,19 @@ const post_signin = async (req, res) => {
   }
 };
 
-module.exports = { post_signin, post_signup };
+const getUser = async (req, res) => {
+  const { user_id, password } = req.body;
+
+  const user = await User.findOne({
+    where: {
+      user_id,
+    },
+  });
+
+  res.json({
+    id: user.user_id,
+    password: user.password,
+  });
+};
+
+module.exports = { postSignin, postSignup, getUser };

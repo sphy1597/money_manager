@@ -4,9 +4,14 @@ const authJwt = require("../middlewares/authJWT");
 const authcontroller = require("../controller/auth");
 const refresh = require("../controller/refresh");
 
-// add user
-router.post("/signup", authcontroller.post_signup);
-router.post("/signin", authcontroller.post_signin);
+// 회원가입
+router.post("/signup", authcontroller.postSignup);
+
+// 로그인
+router.post("/signin", authcontroller.postSignin);
+
+// Test용 getUser
+router.get("/getuser", authJwt, authcontroller.getUser);
 
 router.get("./refresh", refresh);
 module.exports = router;
