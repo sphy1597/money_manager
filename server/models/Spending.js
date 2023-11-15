@@ -13,7 +13,7 @@ const Spending = (sequelize) => {
       type: Sequelize.STRING(100),
       allowNull: false,
     },
-    Kategorie: {
+    category: {
       type: Sequelize.STRING(100),
       allowNull: false,
     },
