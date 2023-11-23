@@ -2,7 +2,6 @@ const jwt = require("../utils/jwt_utils");
 const { User, Spending, Budget } = require("../models");
 
 // 지출 설정
-// note : set 하면 해당 카테고리의 예산에서 값을 줄이기
 const postSetSpending = async (req, res) => {
   const { user_id, category, price, comment } = req.body;
   const spending = await Spending.create({
@@ -11,10 +10,9 @@ const postSetSpending = async (req, res) => {
     price: Number(price),
     comment: comment,
   });
-  // 예산에서 사용한 값을
-  const leftBudget = await updateBudget(user_id, category, 0 - Number(price));
+
   res.json({
-    result: leftBudget,
+    result: spending,
     message: "지출 설정 완료",
   });
 };
@@ -42,13 +40,12 @@ const deleteSpending = async (req, res) => {
   const spend = await Spending.findOne({
     where: { id: spending_id, user_id: user_id },
   });
-  // 지출이 삭제 되어 예산에서 지출을 원래대로 바꿈
-  const leftBudget = await updateBudget(user_id, spend.category, spend.price);
+
   const result = await Spending.destroy({
     where: { id: spending_id, user_id: user_id },
   });
   res.json({
-    result: leftBudget,
+    result: result,
     message: "Delete spending",
   });
 };
@@ -66,23 +63,6 @@ const getSpending = async (req, res) => {
   res.json({
     result: result,
   });
-};
-
-// 사용한 예산을 Budget 테이블의 left_money에 적용함
-const updateBudget = async (_user_id, _category, _price) => {
-  const result = await Budget.update(
-    {
-      left_money: Sequelize.literal(`left_money + ${_price}`),
-    },
-    {
-      where: {
-        user_id: _userId,
-        category: _category,
-      },
-    }
-  );
-
-  return result;
 };
 
 module.exports = {
