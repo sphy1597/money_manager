@@ -1,6 +1,6 @@
 const jwt = require("../utils/jwt_utils");
 const { User, Spending, Budget } = require("../models");
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 
 // 지출 설정
 // note: 동일한 카테고리가 있을 경우 제외,
@@ -88,35 +88,28 @@ const searchSpending = async (userFilters) => {
   const dateClause = {};
 
   // startDate
-  dateClause[Op.gte] = userFilters.startDate || undefined;
+  userFilters.startDate && (dateClause[Op.gte] = userFilters.startDate);
 
   // endDate
-  dateClause[Op.lte] = userFilters.endDate || undefined;
-
-  if (
-    userFilters.startDate === undefined &&
-    userFilters.endDate === undefined
-  ) {
-    userFilters.startDate = new Date();
-    userFilters.endDate = new Date();
-  }
+  userFilters.endDate && (dateClause[Op.lte] = userFilters.endDate);
 
   // dateClause가 비어있지 않은 경우 createdAt 필터 추가
-  Object.keys(dateClause).length > 0 && (whereClause.createdAt = dateClause);
+  whereClause.createdAt = dateClause;
 
   // amount에 대한 필터링을 위한 객체
   const amountClause = {};
 
   // minAmount 필터 추가 (만약 주어졌을 경우에만)
-  amountClause[Op.gte] = userFilters.minAmount || undefined;
+  userFilters.minAmount && (amountClause[Op.gte] = userFilters.minAmount);
 
   // maxAmount 필터 추가 (만약 주어졌을 경우에만)
-  amountClause[Op.lte] = userFilters.maxAmount || undefined;
+  userFilters.maxAmount && (amountClause[Op.lte] = userFilters.maxAmount);
 
   // amountClause가 비어있지 않은 경우 amount 필터 추가
-  Object.keys(amountClause).length > 0 && (whereClause.amount = amountClause);
+  whereClause.amount = amountClause;
 
   // Spending 테이블에서 조건에 맞는 데이터 검색
+  console.log("where : ", whereClause);
   const result = await Spending.findAll({
     where: whereClause,
   }).catch((err) => {
