@@ -84,29 +84,30 @@ const searchSpending = async (userFilters) => {
   // 카테고리
   userFilters.category && (whereClause.category = userFilters.category);
 
-  // createdAt에 대한 필터링을 위한 객체
+  // 날짜 검색 조건
   const dateClause = {};
+  if (userFilters.startDate || userFilters.endDate) {
+    if (userFilters.startDate) {
+      dateClause[Op.gte] = userFilters.startDate; // 시작일 이후의 데이터 검색
+    }
 
-  // startDate
-  userFilters.startDate && (dateClause[Op.gte] = userFilters.startDate);
+    if (userFilters.endDate) {
+      dateClause[Op.lte] = userFilters.endDate; // 종료일 이전의 데이터 검색
+    }
+    whereClause.createdAt = dateClause;
+  }
 
-  // endDate
-  userFilters.endDate && (dateClause[Op.lte] = userFilters.endDate);
-
-  // dateClause가 비어있지 않은 경우 createdAt 필터 추가
-  whereClause.createdAt = dateClause;
-
-  // amount에 대한 필터링을 위한 객체
+  // 최소 최대 값 조건
   const amountClause = {};
-
-  // minAmount 필터 추가 (만약 주어졌을 경우에만)
-  userFilters.minAmount && (amountClause[Op.gte] = userFilters.minAmount);
-
-  // maxAmount 필터 추가 (만약 주어졌을 경우에만)
-  userFilters.maxAmount && (amountClause[Op.lte] = userFilters.maxAmount);
-
-  // amountClause가 비어있지 않은 경우 amount 필터 추가
-  whereClause.amount = amountClause;
+  if (userFilters.minAmount0 || userFilters.maxAmount) {
+    if (userFilters.minAmount) {
+      amountClause[Op.gte] = userFilters.minAmount;
+    }
+    if (userFilters.maxAmount) {
+      amountClause[Op.lte] = userFilters.maxAmount;
+    }
+    whereClause.price = amountClause;
+  }
 
   // Spending 테이블에서 조건에 맞는 데이터 검색
   console.log("where : ", whereClause);
