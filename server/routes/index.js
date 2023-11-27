@@ -16,23 +16,17 @@ router.post("/signin", authController.postSignin);
 // 카테고리 목록 반환
 router.get("/getcategory", categoryController.getCategory);
 
-// 예산 설정
-router.post("/budget", budgetController.postSetBudget);
-
-// 예산 수정
-router.patch("/budget", budgetController.patchBudget);
-
-// 예산 삭제
-router.delete("/budget", budgetController.deleteBudget);
-
-// 예산 확인
-router.get("/budget", budgetController.getBudget);
+/* ------------- 예산 ------------ */
+router.post("/budget", authJwt, budgetController.postSetBudget);
+router.patch("/budget", authJwt, budgetController.patchBudget);
+router.delete("/budget", authJwt, budgetController.deleteBudget);
+router.get("/budget", authJwt, budgetController.getBudget);
 
 /* ------------- 지출 ------------ */
-router.get("/spending", spendingController.getSpending);
-router.post("/spending", spendingController.postSetSpending);
-router.patch("/spending", spendingController.patchSpending);
-router.delete("/spending", spendingController.deleteSpending);
+router.get("/spending", authJwt, spendingController.getSpending);
+router.post("/spending", authJwt, spendingController.postSetSpending);
+router.patch("/spending", authJwt, spendingController.patchSpending);
+router.delete("/spending", authJwt, spendingController.deleteSpending);
 
 /* ------------- 통계 ------------- */
 router.get("/goodnight", statsControoler.goodNight);

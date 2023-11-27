@@ -19,6 +19,7 @@ const postSetBudget = async (req, res) => {
 };
 
 // 예산 수정
+// NOTE : 달 별로 수정 기능 추가 필요
 const patchBudget = async (req, res) => {
   const { user_id, category, total_money } = req.body;
 
@@ -49,7 +50,7 @@ const deleteBudget = async (req, res) => {
 
 // 예산 확인 하기
 const getBudget = async (req, res) => {
-  const { user_id, category } = req.body;
+  const { user_id } = req.body;
 
   const result = await Budget.findAll({
     attributes: ["category", "total_money", "left_money"],
