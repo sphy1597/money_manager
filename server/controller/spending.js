@@ -1,6 +1,7 @@
 const jwt = require("../utils/jwt_utils");
 const { User, Spending, Budget } = require("../models");
 const { Op, where } = require("sequelize");
+const { cacheUpdate } = require("./redis_func");
 
 // 지출 설정
 // note: 동일한 카테고리가 있을 경우 제외,
@@ -12,6 +13,8 @@ const postSetSpending = async (req, res) => {
     price: Number(price),
     comment: comment,
   });
+
+  await cacheUpdate(user_id, category, price);
 
   res.json({
     result: spending,
