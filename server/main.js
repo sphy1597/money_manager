@@ -9,7 +9,6 @@ app.use(express.json());
 
 //router 분리
 const router = require("./routes");
-
 app.use("/", router);
 
 //오류처리
