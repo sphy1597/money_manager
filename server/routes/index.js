@@ -6,7 +6,7 @@ const refresh = require("../controller/refresh");
 const budgetController = require("../controller/budget.js");
 const categoryController = require("../controller/category");
 const spendingController = require("../controller/spending");
-const statsControoler = require("../controller/stats");
+const statsController = require("../controller/stats");
 // 회원가입
 router.post("/signup", authController.postSignup);
 
@@ -29,7 +29,8 @@ router.patch("/spending", authJwt, spendingController.patchSpending);
 router.delete("/spending", authJwt, spendingController.deleteSpending);
 
 /* ------------- 통계 ------------- */
-router.get("/goodnight", statsControoler.goodNight);
+router.get("/goodnight", statsController.goodNight);
+router.get("/goodmorning", statsController.goodMorning);
 
 // Test용 getUser
 router.get("/getuser", authJwt, authController.getUser);

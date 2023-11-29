@@ -26,6 +26,14 @@ const postSetSpending = async (req, res) => {
 const patchSpending = async (req, res) => {
   const { spending_id, user_id, category, price, comment } = req.body;
 
+  const oldValue = await Spending.findOne({
+    where: { id: spending_id },
+  });
+
+  // 원래 2000원, 업데이트가 1000원 >> 총 지출 ex)4000원에서 -1000원
+  // 원래 2000원, 업데이트가 3000원 >> 총 지출 ex)4000원에서 +1000원
+  await cacheUpdate(user_id, category, Number(price) - Number(oldValue.price));
+
   const result = await Spending.update(
     {
       category: category,
@@ -40,11 +48,14 @@ const patchSpending = async (req, res) => {
 };
 
 // 지출 삭제
+// note : 예외 처리 필요
 const deleteSpending = async (req, res) => {
   const { spending_id, user_id } = req.body;
   const spend = await Spending.findOne({
     where: { id: spending_id, user_id: user_id },
   });
+
+  await cacheUpdate(spend.user_id, spend.category, 0 - Number(spend.price));
 
   const result = await Spending.destroy({
     where: { id: spending_id, user_id: user_id },
