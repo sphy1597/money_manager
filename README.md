@@ -1,4 +1,4 @@
-# Money Manager - 예산 관리 서비스
+![image](https://github.com/sphy1597/money_manager/assets/101171867/907b3173-7824-472b-b069-be803e09088f)# Money Manager - 예산 관리 서비스
 
 <p align = "center" ><img src="https://github.com/sphy1597/money_manager/assets/101171867/ab7838af-8462-495c-a4a8-6f4968c7240b"/></p>
 
@@ -30,6 +30,10 @@ npm start
 ```
 
 ## API Reference
+
+![image](https://github.com/sphy1597/money_manager/assets/101171867/c7abb604-ee55-467c-ad04-4203775f0251)
+
+세부 내용 문서
 [api Refe.pdf](https://github.com/sphy1597/money_manager/files/13542936/api.Refe.pdf)
 
 ## ERD
