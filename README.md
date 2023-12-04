@@ -30,9 +30,10 @@ npm start
 ```
 
 ## API Reference
-
+[api Refe.pdf](https://github.com/sphy1597/money_manager/files/13542936/api.Refe.pdf)
 
 ## ERD
+![image](https://github.com/sphy1597/money_manager/assets/101171867/b5935353-e800-481d-a147-609ae4689701)
 
 ## Function
 
