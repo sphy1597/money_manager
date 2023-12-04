@@ -31,7 +31,7 @@ const patchBudget = async (req, res) => {
       where: { user_id: user_id, category: category },
     }
   );
-  res.json({ result: result, message: "update budget" });
+  res.json({ result: result, message: "예산 수정 완료" });
 };
 
 // 예산 삭제
