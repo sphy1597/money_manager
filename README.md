@@ -2,6 +2,15 @@
 
 <p align = "center" ><img src="https://github.com/sphy1597/money_manager/assets/101171867/ab7838af-8462-495c-a4a8-6f4968c7240b"/></p>
 
+<p align="center">  
+<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
+<img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+</p>
+
+
+
 ## 목차
 1. [프로젝트 소개](#프로젝트-소개)
 2. [Installation](#Installation)
