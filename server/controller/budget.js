@@ -36,10 +36,10 @@ const patchBudget = async (req, res) => {
 
 // 예산 삭제
 const deleteBudget = async (req, res) => {
-  const { user_id, category } = req.body;
+  const { user_id, id } = req.body;
 
   const result = await Budget.destroy({
-    where: { user_id: user_id, category: category },
+    where: { user_id: user_id, id: id },
   });
 
   res.json({
@@ -53,7 +53,7 @@ const getBudget = async (req, res) => {
   const { user_id } = req.body;
 
   const result = await Budget.findAll({
-    attributes: ["category", "total_money", "left_money"],
+    attributes: ["id", "category", "total_money", "left_money"],
     where: { user_id: user_id },
   });
   console.log("result : ", result);
