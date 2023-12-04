@@ -4,12 +4,12 @@
 
 ## 목차
 1. [프로젝트 소개](#프로젝트-소개)
-2. [Installation]
-3. [Running App]
-4. [API Reference]
-5. [ERD]
-6. [Function]
-7. [TIL]
+2. [Installation](#Installation)
+3. [Running App](#Running-App)
+4. [API Reference](#API-Referenc)
+5. [ERD](#ERD)
+6. [Function](#Function)
+7. [TIL](#TIL)
 
 
 ## 프로젝트 소개
