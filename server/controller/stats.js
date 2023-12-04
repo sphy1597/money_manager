@@ -67,8 +67,6 @@ const goodNight = async (req, res) => {
   });
 };
 
-/* --------------- 아침 알림 함수들 ----------------- */
-
 /* --------------- 저녁 알림 함수들 ----------------- */
 
 // 이전 예산 정보 가져오기
@@ -142,7 +140,7 @@ const evaluate = async (oldBudget, allCache) => {
         100
       ).toFixed(2)}%`,
       "일일 추천 사용 금액": recoSpend,
-      "추천 사용 대비 비율": `${recoPer}%`,
+      "추천 대비 사용 비율": `${recoPer}%`,
     };
     averSum = averSum + recoPer;
   }

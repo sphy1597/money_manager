@@ -29,8 +29,8 @@ router.patch("/spending", authJwt, spendingController.patchSpending);
 router.delete("/spending", authJwt, spendingController.deleteSpending);
 
 /* ------------- 통계 ------------- */
-router.get("/goodnight", statsController.goodNight);
-router.get("/goodmorning", statsController.goodMorning);
+router.get("/goodnight", authJwt, statsController.goodNight);
+router.get("/goodmorning", authJwt, statsController.goodMorning);
 
 // Test용 getUser
 router.get("/getuser", authJwt, authController.getUser);
