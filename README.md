@@ -1,4 +1,4 @@
-![image](https://github.com/sphy1597/money_manager/assets/101171867/907b3173-7824-472b-b069-be803e09088f)# Money Manager - 예산 관리 서비스
+# Money Manager - 예산 관리 서비스
 
 <p align = "center" ><img src="https://github.com/sphy1597/money_manager/assets/101171867/ab7838af-8462-495c-a4a8-6f4968c7240b"/></p>
 
